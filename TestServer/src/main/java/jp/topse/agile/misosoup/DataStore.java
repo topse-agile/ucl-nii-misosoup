@@ -1,3 +1,4 @@
+package jp.topse.agile.misosoup;
 
 import java.util.HashMap;
 import java.util.Map;

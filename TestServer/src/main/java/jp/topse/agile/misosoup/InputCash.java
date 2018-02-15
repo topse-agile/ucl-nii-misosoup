@@ -1,4 +1,4 @@
-
+package jp.topse.agile.misosoup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
