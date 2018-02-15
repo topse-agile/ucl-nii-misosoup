@@ -43,6 +43,10 @@
           <httpConnector>
             <port>8080</port>
           </httpConnector>
+	  <webAppSourceDirectory>WebContent</webAppSourceDirectory>
+          <webApp>
+            <contextPath>/TestServer</contextPath>
+          </webApp>
         </configuration>
       </plugin>
     </plugins>
