@@ -1,0 +1,71 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${BROWSER}        chrome
+
+*** Test Cases ***
+Purchase Operations Works Well
+    [Template]    Add Operation Workflow
+    1    0    200    1000    800
+    1    1    300    1000    700
+    10    10    3000    10000    7000
+
+*** Keywords ***
+Add Operation Workflow
+    [Arguments]    ${arg_num_of_orange}    ${arg_num_of_apple}    ${arg_total_price}    ${arg_passed_money}    ${arg_change}
+    Open Application Page
+    Clear Bascket
+    :FOR    ${INDEX}    IN RANGE    0    ${arg_num_of_orange}
+    \    Click Orange
+    :FOR    ${INDEX}    IN RANGE    0    ${arg_num_of_apple}
+    \    Click Apple
+    ${total_price}=    Get Total In Application Page
+    Should Be Equal    ${total_price}    ${arg_total_price}
+    Input Passed Money    ${arg_passed_money}
+    ${inputted_passed_money}=    Get Inputted Passed Money
+    Should Be Equal    ${inputted_passed_money}    ${arg_passed_money}
+    Calculate Change
+    ${calculated_change}=    Get Calculated Change
+    Should Be Equal    ${calculated_change}    ${arg_change}
+    Close Application Page
+
+Open Application Page
+    Open Browser    file:///Users/hirura/Desktop/topse/ucl-nii-misosoup/miso_soup/main.html    ${BROWSER}
+
+Clear Bascket
+    [Arguments]
+    Click Button    submit
+
+Click Orange
+    [Arguments]
+    Click Element    orange
+
+Click Apple
+    [Arguments]
+    Click Element    apple
+
+Get Total In Application Page
+    [Arguments]
+    ${result}=    Get Text    total
+    [Return]    ${result}
+
+Input Passed Money
+    [Arguments]    ${arg_passed_money}
+    Input Text    money    ${arg_passed_money}
+
+Get Inputted Passed Money
+    ${result}=    Get Value    money
+    [Return]    ${result}
+
+Calculate Change
+    [Arguments]
+    Click Button    submit
+
+Get Calculated Change
+    [Arguments]
+    ${result}=    Get Text    change
+    [Return]    ${result}
+
+Close Application Page
+    Close Browser

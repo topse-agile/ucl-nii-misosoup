@@ -21,6 +21,21 @@
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework-maven-plugin</artifactId>
+        <version>1.4.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <testCasesDirectory>${project.basedir}/src/test/resources/scenarios</testCasesDirectory>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -34,6 +49,11 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.robotframework</groupId>
+      <artifactId>robotframework</artifactId>
+      <version>2.9.1</version>
     </dependency>
   </dependencies>
 </project>
