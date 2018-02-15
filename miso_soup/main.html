@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>POS</title>
+		<link rel="stylesheet" type="text/css" href="styles/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script>
+		
+			function addItem(itemType){
+				$.post("http://localhost:8080/TestServer/additem",
+				JSON.stringify({"Type":"addItem", "Item":itemType}),
+				function(responseJson) {  
+					$("#total").html(responseJson["totalValue"]);
+					$("#order").append(itemType);
+					$("#order").append("<br>");
+				},
+				"json");
+			}
+			$(document).on("click", "#orange", function(){ addItem("Orange");}); 
+			$(document).on("click", "#apple", function(){ addItem("Apple");});
+			
+			$(document).on("click", "#submit", function() { 
+				var value = $('#FormDiv').find('input[name="money"]').val();
+				$.post("http://localhost:8080/TestServer/additem",
+				JSON.stringify({"Type":"inputCash", "Amount":value}), 
+				function(responseJson) {   
+					$("#change").text(responseJson['Change']);
+				},
+				"json");
+			});
+			
+			
+		</script>
+	</head>
+	<body>
+		<img class="logo" src="assets/logo.png">
+		<section>
+			<p>ITEM SELECTION</p>
+			<p>
+				<img id="orange" src="assets/orange2.png">
+				<img id="apple" src="assets/apple.png">
+			</p>
+			<p>SELECTED ITEMS</p>
+			<div style="height:250px;width:500px;border:1px solid #221e1f; overflow:auto;" id="order"></div>
+			<br>
+			<p>Total value of items: <span id="total">0</span></p>
+			<div id = "FormDiv">
+				<form name="moneyForm">
+				Amount of cash received: <input name="money" type="text" value="0"/> 
+				<input type="button" value="Submit" id="submit"/>
+				</form>
+				<p>Change: <span id="change">0</span></p>
+			</div>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+body {
+	background-color: rgb(230, 112, 74);
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	font-size: 1.2em;
+}
+
+p.logo {
+	float:left;
+	margin-left: 0.5%;
+	font-size: 2em;
+	color: white;
+}
+
+img.logo {
+	float: left;
+}
+
+H1 {
+	font-size: 5.5em;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	width: 8em;
+	text-align: center;
+}
+
+img.startBtn {
+	margin-top: 5%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%) 
+}
