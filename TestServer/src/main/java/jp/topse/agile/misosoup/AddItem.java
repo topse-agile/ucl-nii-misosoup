@@ -27,11 +27,13 @@ public class AddItem extends HttpServlet {
 	private Bascket bascket;
 	private DataStore dataStore;
 	
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 		dataStore = new DataStore();
 		bascket = new Bascket(dataStore);
 	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
@@ -48,23 +50,26 @@ public class AddItem extends HttpServlet {
 		if(type.equals("addItem")){
 			String item = jObj.get("Item").getAsString();
 			bascket.addItem(item);
-			//int itemPrice = dataStore.getPrice(item);
 			Map<String, Integer> responseMap = new LinkedHashMap<>();
-			//responseMap.put("items", item);
 			responseMap.put("totalValue", bascket.getTotalPrice());
 			String json = new Gson().toJson(responseMap);
 			response.getWriter().write(json);
 		} else if(type.equals("inputCash")){
 			String inputValue = jObj.get("Amount").getAsString();
 			int inputVal = Integer.parseInt(inputValue);
-			// int change = inputValue - backetTotal 
 			int changeAmount = inputVal - bascket.getTotalPrice();
 			Map<String, Integer> responseMap = new LinkedHashMap<>();
 			responseMap.put("Change", changeAmount);
 			String json = new Gson().toJson(responseMap);
 			response.getWriter().write(json);
 			bascket.clear();
-		} 
+		} else if(type.equals("resetBascket")) {
+			bascket.clear();
+			Map<String, Integer> responseMap = new LinkedHashMap<>();
+			responseMap.put("totalValue", bascket.getTotalPrice());
+			String json = new Gson().toJson(responseMap);
+			response.getWriter().write(json);
+		}
 
 	}
 	
