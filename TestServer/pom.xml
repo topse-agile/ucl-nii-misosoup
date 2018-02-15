@@ -21,6 +21,34 @@
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework-maven-plugin</artifactId>
+        <version>1.4.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <testCasesDirectory>${project.basedir}/src/test/resources/scenarios</testCasesDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <configuration>
+          <httpConnector>
+            <port>8080</port>
+          </httpConnector>
+	  <webAppSourceDirectory>WebContent</webAppSourceDirectory>
+          <webApp>
+            <contextPath>/TestServer</contextPath>
+          </webApp>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -39,6 +67,11 @@
     	<groupId>org.mockito</groupId>
     	<artifactId>mockito-core</artifactId>
     	<version>1.10.19</version>
+	</dependency>
+	<dependency>
+      <groupId>org.robotframework</groupId>
+      <artifactId>robotframework</artifactId>
+      <version>2.9.1</version>
     </dependency>
   </dependencies>
 </project>
