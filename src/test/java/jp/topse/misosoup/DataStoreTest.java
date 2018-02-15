@@ -11,7 +11,7 @@ public class DataStoreTest {
     {
         DataStore dataStore = new DataStore();
 
-        assertThat(stockManager.getPrice("Apple"), is(100));
+        assertThat(dataStore.getPrice("Apple"), is(100));
     }
 
     @Test
@@ -19,6 +19,26 @@ public class DataStoreTest {
     {
         DataStore dataStore = new DataStore();
 
-        assertThat(stockManager.getPrice("Orange"), is(200));
+        assertThat(dataStore.getPrice("Orange"), is(200));
+    }
+
+    @Test
+    public void registerBananaWithPrice300()
+    {
+        DataStore dataStore = new DataStore();
+        
+        dataStore.updateItem("Banana", 300);
+
+        assertThat(dataStore.getPrice("Banana"), is(300));
+    }
+
+    @Test
+    public void updateBananaWithPrice500()
+    {
+        DataStore dataStore = new DataStore();
+        
+        dataStore.updateItem("Banana", 500);
+
+        assertThat(dataStore.getPrice("Banana"), is(500));
     }
 }
