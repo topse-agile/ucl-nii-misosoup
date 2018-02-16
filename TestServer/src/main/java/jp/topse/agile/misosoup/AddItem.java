@@ -2,6 +2,7 @@ package jp.topse.agile.misosoup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,6 +18,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Servlet implementation class AddItem
@@ -73,6 +77,41 @@ public class AddItem extends HttpServlet {
 			Map<String, Integer> responseMap = dataStore.getItems();
 			String json = new Gson().toJson(responseMap);
 			response.getWriter().write(json);
+		} else if(type.equals("say")) {
+			say("Welcome customer");
+			Map<String, Integer> responseMap = new LinkedHashMap<>();
+			String json = new Gson().toJson(responseMap);
+			response.getWriter().write(json);
+		}
+	}
+
+	private void say(String message) {
+		HttpURLConnection con = null;
+		StringBuffer result = new StringBuffer();
+		try {
+			URL url = new URL("http://192.168.128.102:8091/google-home-notifier");
+			con = (HttpURLConnection) url.openConnection();
+			con.setDoOutput(true);
+			con.setRequestMethod("POST");
+			//con.setRequestProperty("Accept-Language", "jp");
+			//con.setRequestProperty("Content-Type", "application/JSON; charset=utf-8");
+			//con.setRequestProperty("Content-Length", String.valueOf(JSON.length()));
+			OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
+			out.write("text=" + message);
+			out.flush();
+			con.connect();
+			final int status = con.getResponseCode();
+			if (status == HttpURLConnection.HTTP_OK) {
+				System.out.println("Message sent to Google Home");
+			} else {
+				System.out.println("Message sent with failure");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			if (con != null) {
+				con.disconnect();
+			}
 		}
 	}
 	
