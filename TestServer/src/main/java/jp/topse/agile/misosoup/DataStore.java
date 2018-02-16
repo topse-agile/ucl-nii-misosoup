@@ -20,7 +20,7 @@ public class DataStore {
 	   items.put(item, price);
    }
    
-   public Map<String, Integer> getItemAndPriceList() {
+   public Map<String, Integer> getItems() {
 	   return items;
    }
 }

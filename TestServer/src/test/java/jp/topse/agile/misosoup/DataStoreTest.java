@@ -46,28 +46,28 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testGetItemAndPriceListOfInitialState()
+    public void testGetItemsOfInitialState()
     {
         DataStore dataStore = new DataStore();
         
-        Map<String, Integer> itemAndPriceList = new HashMap<String, Integer>();
-        itemAndPriceList.put("Apple", 100);
-        itemAndPriceList.put("Orange", 200);
+        Map<String, Integer> items = new HashMap<String, Integer>();
+        items.put("Apple", 100);
+        items.put("Orange", 200);
         
-        assertThat(dataStore.getItemAndPriceList(), is(itemAndPriceList));
+        assertThat(dataStore.getItems(), is(items));
     }
 
     @Test
-    public void testGetItemAndPriceListWhenBananaIsAdded()
+    public void testGetItemsWhenBananaIsAdded()
     {
         DataStore dataStore = new DataStore();
         dataStore.updateItem("Banana", 500);
         
-        Map<String, Integer> itemAndPriceList = new HashMap<String, Integer>();
-        itemAndPriceList.put("Apple", 100);
-        itemAndPriceList.put("Orange", 200);
-        itemAndPriceList.put("Banana", 500);
+        Map<String, Integer> items = new HashMap<String, Integer>();
+        items.put("Apple", 100);
+        items.put("Orange", 200);
+        items.put("Banana", 500);
         
-        assertThat(dataStore.getItemAndPriceList(), is(itemAndPriceList));
+        assertThat(dataStore.getItems(), is(items));
     }
 }

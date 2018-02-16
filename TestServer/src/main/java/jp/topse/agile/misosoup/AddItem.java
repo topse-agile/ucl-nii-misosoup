@@ -69,8 +69,11 @@ public class AddItem extends HttpServlet {
 			responseMap.put("totalValue", bascket.getTotalPrice());
 			String json = new Gson().toJson(responseMap);
 			response.getWriter().write(json);
+		} else if(type.equals("getItems")) {
+			Map<String, Integer> responseMap = dataStore.getItems();
+			String json = new Gson().toJson(responseMap);
+			response.getWriter().write(json);
 		}
-
 	}
 	
 	private JsonObject parseRequestJson(HttpServletRequest request) throws IOException{
