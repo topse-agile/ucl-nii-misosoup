@@ -15,7 +15,12 @@ public class DataStore {
 	   Integer price = items.get(item);
 	   return price;
    }
+   
    public void updateItem(String item, Integer price){
 	   items.put(item, price);
+   }
+   
+   public Map<String, Integer> getItemAndPriceList() {
+	   return items;
    }
 }

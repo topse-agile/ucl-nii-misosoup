@@ -3,6 +3,9 @@ package jp.topse.agile.misosoup;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 public class DataStoreTest {
@@ -15,7 +18,7 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testGetOrangePriceReturns100()
+    public void testGetOrangePriceReturns200()
     {
         DataStore dataStore = new DataStore();
 
@@ -40,5 +43,31 @@ public class DataStoreTest {
         dataStore.updateItem("Banana", 500);
 
         assertThat(dataStore.getPrice("Banana"), is(500));
+    }
+
+    @Test
+    public void testGetItemAndPriceListOfInitialState()
+    {
+        DataStore dataStore = new DataStore();
+        
+        Map<String, Integer> itemAndPriceList = new HashMap<String, Integer>();
+        itemAndPriceList.put("Apple", 100);
+        itemAndPriceList.put("Orange", 200);
+        
+        assertThat(dataStore.getItemAndPriceList(), is(itemAndPriceList));
+    }
+
+    @Test
+    public void testGetItemAndPriceListWhenBananaIsAdded()
+    {
+        DataStore dataStore = new DataStore();
+        dataStore.updateItem("Banana", 500);
+        
+        Map<String, Integer> itemAndPriceList = new HashMap<String, Integer>();
+        itemAndPriceList.put("Apple", 100);
+        itemAndPriceList.put("Orange", 200);
+        itemAndPriceList.put("Banana", 500);
+        
+        assertThat(dataStore.getItemAndPriceList(), is(itemAndPriceList));
     }
 }
