@@ -15,7 +15,7 @@ Purchase Operations Works Well
 Add Operation Workflow
     [Arguments]    ${arg_num_of_orange}    ${arg_num_of_apple}    ${arg_total_price}    ${arg_passed_money}    ${arg_change}
     Open Application Page
-    Clear Bascket
+    Reset Bascket
     :FOR    ${INDEX}    IN RANGE    0    ${arg_num_of_orange}
     \    Click Orange
     :FOR    ${INDEX}    IN RANGE    0    ${arg_num_of_apple}
@@ -33,9 +33,9 @@ Add Operation Workflow
 Open Application Page
     Open Browser    http://localhost:8080/TestServer/main.html    ${BROWSER}
 
-Clear Bascket
+Reset Bascket
     [Arguments]
-    Click Button    submit
+    Click Button    resetBascket
 
 Click Orange
     [Arguments]
