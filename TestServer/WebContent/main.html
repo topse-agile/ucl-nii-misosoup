@@ -29,8 +29,18 @@
 				},
 				"json");
 			});
-			
-			
+
+			$(document).on("click", "#resetBascket", function() { 
+				$.post("http://localhost:8080/TestServer/additem",
+				JSON.stringify({"Type":"resetBascket"}), 
+				function(responseJson) {
+					$("#order").text("");
+					$("#total").text("0");
+					$("#change").text("0");
+					$('input[name="money"]').val(0);
+				},
+				"json");
+			});
 		</script>
 	</head>
 	<body>
@@ -52,6 +62,8 @@
 				</form>
 				<p>Change: <span id="change">0</span></p>
 			</div>
+			<br>
+			<center><button id="resetBascket">Reset Basket</button></center>
 		</section>
 	</body>
 </html>
